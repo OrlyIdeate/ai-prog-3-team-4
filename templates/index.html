@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画像生成App</title>
+</head>
+<body>
+    <h1>画像生成App</h1>
+    <form method="POST">
+        <label for="prompt">どのような画像を生成したいですか:</label>
+        <input type="text" id="prompt" name="prompt" required>
+        <br>
+        <label for="size">画像のサイズを選択:</label>
+        <select id="size" name="size">
+            <option value="256x256">256x256</option>
+            <option value="512x512">512x512</option>
+            <option value="1024x1024">1024x1024</option>
+        </select>
+        <br>
+        <label for="style">画像のスタイルを選択:</label>
+        <select id="style" name="style">
+            <option value="リアル">リアル</option>
+            <option value="アニメ">アニメ</option>
+            <option value="抽象">抽象</option>
+            <option value="幻想的">幻想的</option>
+        </select>
+        <br>
+        <button type="submit">画像を生成</button>
+    </form>
+    {% if image_url %}
+        <h2>生成された画像</h2>
+        <img src="{{ image_url }}" alt="Generated Image">
+        <br>
+        <a href="{{ url_for('download', image_url=image_url) }}">画像をダウンロード</a>
+    {% endif %}
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
