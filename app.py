@@ -1,36 +1,40 @@
-import streamlit as st
+from flask import Flask, render_template, request, send_file
 import openai
 import os
 from dotenv import load_dotenv
+import requests
+from io import BytesIO
 
+app = Flask(__name__)
 load_dotenv('.env')
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
-st.title("画像生成App")
-
-prompt = st.text_input("どのような画像を生成したいですか:")
-
-# サイズ選択オプション
-size_options = ["256x256", "512x512", "1024x1024"]
-selected_size = st.selectbox("画像のサイズを選択:", size_options)
-
-# スタイル選択オプション
-style_options = ["リアル", "アニメ", "抽象", "幻想的"]
-selected_style = st.selectbox("画像のスタイルを選択:", style_options)
-
-if st.button("画像を生成"):
-    if prompt:
-        with st.spinner("画像を生成中..."):
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        prompt = request.form.get('prompt')
+        selected_size = request.form.get('size')
+        selected_style = request.form.get('style')
+        
+        if prompt:
             response = openai.Image.create(
                 prompt=f"{prompt}, {selected_style}",
                 n=1,
                 size=selected_size
             )
             image_url = response['data'][0]['url']
-            st.image(image_url, caption='Generated Image')
+            return render_template('index.html', image_url=image_url)
+        else:
+            error = "プロンプトを入力してください"
+            return render_template('index.html', error=error)
+    return render_template('index.html')
 
-            # ダウンロードボタン
-            st.download_button("画像をダウンロード", image_url, "generated_image.png", "image/png")
-    else:
-        st.error("プロンプトを入力してください")
+@app.route('/download', methods=['GET'])
+def download():
+    image_url = request.args.get('image_url')
+    response = requests.get(image_url)
+    return send_file(BytesIO(response.content), as_attachment=True, download_name='generated_image.png', mimetype='image/png')
+
+if __name__ == '__main__':
+    app.run(debug=True)
