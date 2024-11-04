@@ -13,6 +13,8 @@
 python app.py
 ```
 
+### requirements.txt
+
 ---
 
 ## プロジェクト名
