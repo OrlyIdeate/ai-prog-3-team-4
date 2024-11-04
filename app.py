@@ -20,7 +20,7 @@ def index():
         selected_style = request.form.get('style')
         
         if prompt:
-            image_url = create_image(prompt, selected_size, selected_style)  # 修正
+            image_url = create_image(prompt, selected_size, selected_style)
             return render_template('index.html', image_url=image_url)
         else:
             error = "プロンプトを入力してください"
