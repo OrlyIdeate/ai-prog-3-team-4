@@ -3,18 +3,25 @@
 ### アプリの起動方法
 
 1. venv（仮想環境）を起動
-```
-.\.venv\Scripts\activate
+    ```
+    .\.venv\Scripts\activate
 
-```
+    ```
 2. アプリ起動
 
-```
-python app.py
-```
+    ```
+    python app.py
+    ```
 
-### requirements.txt
-
+### requirements.txtを使ったライブラリ管理
+- requirements.txtのライブラリのインストール
+    ```
+    pip install -r requirements.txt
+    ```
+- requirements.txtのライブラリの追加
+    ```
+    pip freeze > requirements.txt
+    ```
 ---
 
 ## プロジェクト名
