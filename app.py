@@ -4,6 +4,8 @@ import os
 from dotenv import load_dotenv
 import requests
 from io import BytesIO
+from services.openai_client import create_image
+
 
 app = Flask(__name__)
 load_dotenv('.env')
@@ -18,12 +20,7 @@ def index():
         selected_style = request.form.get('style')
         
         if prompt:
-            response = openai.Image.create(
-                prompt=f"{prompt}, {selected_style}",
-                n=1,
-                size=selected_size
-            )
-            image_url = response['data'][0]['url']
+            image_url = create_image(prompt, selected_size, selected_style)  # 修正
             return render_template('index.html', image_url=image_url)
         else:
             error = "プロンプトを入力してください"
