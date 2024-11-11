@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import requests
 from io import BytesIO
 from services.openai_client import create_image
+from services.translation import translate
 
 
 app = Flask(__name__)
@@ -18,6 +19,9 @@ def index():
         prompt = request.form.get('prompt')
         selected_size = request.form.get('size')
         selected_style = request.form.get('style')
+        
+        # 日本語から英語に翻訳
+        prompt = translate(prompt)
         
         if prompt:
             image_url = create_image(prompt, selected_size, selected_style)
