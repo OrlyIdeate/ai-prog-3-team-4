@@ -25,7 +25,7 @@ def index():
         
         if prompt:
             image_url = create_image(prompt, selected_size, selected_style)
-            return render_template('index.html', image_url=image_url)
+            return render_template('index.html', image_url=image_url, prompt=prompt)
         else:
             error = "プロンプトを入力してください"
             return render_template('index.html', error=error)
