@@ -24,8 +24,8 @@ def index():
         prompt = translate(prompt)
         
         if prompt:
-            image_url = create_image(prompt, selected_size, selected_style)
-            return render_template('index.html', image_url=image_url, prompt=prompt)
+            image_urls = create_image(prompt, selected_size, selected_style)
+            return render_template('result.html', image_urls=image_urls, prompt=prompt)
         else:
             error = "プロンプトを入力してください"
             return render_template('index.html', error=error)
