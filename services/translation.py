@@ -1,19 +1,10 @@
-import requests
+from deepl import Translator
 from dotenv import load_dotenv
 import os
 
 def translate(text):
+    '''日本語から英語に翻訳'''
     load_dotenv('.env')
-    url = "https://api-free.deepl.com/v2/translate"
-    params = {
-        "auth_key": os.getenv('DEEPL_API_KEY'),
-        "text": text,
-        "source_lang": "JA",
-        "target_lang": "EN"
-    }
-    response = requests.post(url, data=params)
-    if response.status_code == 200:
-        result = response.json()
-        return result.get('translations')[0].get('text')
-    else:
-        response.raise_for_status()
+    translator = Translator(os.getenv('DEEPL_API_KEY'))
+    result = translator.translate_text(text, source_lang='JA', target_lang='EN-US')
+    return result
