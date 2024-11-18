@@ -15,11 +15,12 @@ def create_image(prompt: str, size: str, style: str) -> str:
         style (str): 画像のスタイルを指定するテキスト。
 
     Returns:
-        str: 生成された画像のURL。
+        list: 生成された画像のURLのリスト。
     """
     response = openai.Image.create(
         prompt=f"{prompt}, {style}",
-        n=1,
+        n=4,
         size=size
     )
-    return response['data'][0]['url']
+    result = [f"{response['data'][i]['url']}" for i in range(4)]
+    return result
