@@ -1,6 +1,7 @@
 import openai
 import os
 from dotenv import load_dotenv
+import requests
 
 load_dotenv('.env')
 openai.api_key = os.getenv('OPENAI_API_KEY')
@@ -17,10 +18,22 @@ def create_image(prompt: str, size: str, style: str) -> str:
     Returns:
         list: 生成された画像のURLのリスト。
     """
-    response = openai.Image.create(
+    first_resopnse = openai.Image.create(
+        model="dall-e-3",
         prompt=f"{prompt}, {style}",
-        n=4,
+        n=1,
         size=size
     )
-    result = [f"{response['data'][i]['url']}" for i in range(4)]
-    return result
+    first_image_url = first_resopnse['data'][0]['url']
+    
+    image_data = requests.get(first_image_url).content
+    
+    variation_response = openai.Image.create_variation(
+        image=image_data,
+        n=3,
+        size=size
+    )
+    
+    variation_urls = [variation['url'] for variation in variation_response['data']]
+    
+    return [first_image_url] + variation_urls
