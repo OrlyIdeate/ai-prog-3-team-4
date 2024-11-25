@@ -35,6 +35,23 @@ label {
     margin: 10px 0 5px;
 }
 
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #333;
+    color: #00ffea;
+    font-size: 1em;
+    box-shadow: 0 0 5px rgba(0, 255, 234, 0.3);
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+textarea:focus, select:focus {
+    box-shadow: 0 0 8px rgba(0, 255, 234, 0.6);
+}
+
 input[type="text"], select {
     width: 100%;
     padding: 10px;
