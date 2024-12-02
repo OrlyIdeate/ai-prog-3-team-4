@@ -13,11 +13,33 @@ body {
 }
 
 h1 {
-    color: #00ffea;
-    font-size: 2.5em;
+    color: #e5ff00;
+    font-size: 5em;
     text-shadow: 0 0 8px #00ffea, 0 0 16px #00ffea;
     margin-bottom: 20px;
 }
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 80px;
+    background: linear-gradient(45deg, #00d9ff, #00bfff, #1e90ff); 
+    -webkit-background-clip: text; 
+    color: transparent; 
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.5); 
+    animation: glowing 1.5s ease-in-out infinite alternate; 
+  }
+  
+  @keyframes glowing {
+    0% {
+      text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+    50% {
+      text-shadow: 0 0 15px rgba(0, 255, 255, 1), 0 0 25px rgba(0, 255, 255, 0.8);
+    }
+    100% {
+      text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+  }
+  
 
 form {
     background-color: #1e1e1e;
