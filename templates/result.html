@@ -8,7 +8,12 @@
 </head>
 <body>
     <h1>生成結果</h1>
-    <p style="color: #00ffea">{{ prompt }}</p>
+    <h5>元のプロンプト</h5>
+    <p class="prompt">{{ origin_prompt }}</p>
+    <h5>生成の際に利用したプロンプト</h5>
+    <p class="prompt">{{ prompt }}</p> 
+    <p class="prompt">サイズ：{{size}}  スタイル:{{style}}</p>
+    
     <div class="image-grid">
         {% if image_urls %}
             {% for url in image_urls %}

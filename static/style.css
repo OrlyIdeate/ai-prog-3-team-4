@@ -16,7 +16,7 @@ h1 {
     color: #e5ff00;
     font-size: 5em;
     text-shadow: 0 0 8px #00ffea, 0 0 16px #00ffea;
-    margin-bottom: 20px;
+    margin-bottom: 0;
 }
 h1 {
     font-family: 'Arial', sans-serif;
@@ -26,6 +26,11 @@ h1 {
     color: transparent; 
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 30px rgba(0, 255, 255, 0.5); 
     animation: glowing 1.5s ease-in-out infinite alternate; 
+  }
+
+  h5 {
+    color: #00ffea; 
+    margin: 0;
   }
   
   @keyframes glowing {
@@ -121,9 +126,6 @@ h2 {
 
 img {
     max-width: 100%;
-    border: 3px solid #00ffea;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 255, 234, 0.6);
     margin-top: 15px;
 }
 
@@ -146,6 +148,17 @@ p {
     text-align: center;
 }
 
+p.prompt {
+    color: #00ffea; 
+    border: 1px solid #00ffea; 
+    border-radius: 8px; 
+    box-shadow: #00ffea 0 0 10px; 
+    width: 30%; 
+    text-align: center; 
+    padding: 5px; 
+    margin-top: 3px;
+}
+
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2列に分ける */
@@ -159,5 +172,7 @@ p {
 .image-item img {
     width: 100%;
     height: auto; 
+    border: solid #00ffea;
     border-radius: 8px;
+    box-shadow: #00ffea 0 0 10px;
 }

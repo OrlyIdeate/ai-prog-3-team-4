@@ -10,16 +10,16 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        prompt = request.form.get('prompt')
+        origin_prompt = request.form.get('prompt')
         selected_size = request.form.get('size')
         selected_style = request.form.get('style')
         
         # 日本語から英語に翻訳
-        prompt = translate(prompt)
+        translated_prompt = translate(origin_prompt)
         
-        if prompt:
-            image_urls = create_image(prompt, selected_size, selected_style)
-            return render_template('result.html', image_urls=image_urls, prompt=prompt)
+        if translated_prompt:
+            image_urls = create_image(translated_prompt, selected_size, selected_style)
+            return render_template('result.html', image_urls=image_urls, origin_prompt=origin_prompt, prompt=translated_prompt, size=selected_size, style=selected_style)
         else:
             error = "プロンプトを入力してください"
             return render_template('index.html', error=error)
