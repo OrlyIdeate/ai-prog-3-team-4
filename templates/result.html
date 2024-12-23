@@ -17,7 +17,7 @@
     <div class="image-grid">
         {% if image_urls %}
             {% for url in image_urls %}
-                <div class="image-item"><img src="{{ url }}" alt="Generated Image"></div>
+                <a href="{{ url }}"><div class="image-item"><img src="{{ url }}" alt="Generated Image"></div></a>
             {% endfor %}
         {% else %}
             <p>画像が見つかりませんでした。</p>

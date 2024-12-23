@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, jsonify
 import requests
 from io import BytesIO
-from services.openai_client import create_image
+from services.openai_client import create_image, create_variation
 from services.translation import translate
 
 
@@ -30,6 +30,21 @@ def download():
     image_url = request.args.get('image_url')
     response = requests.get(image_url)
     return send_file(BytesIO(response.content), as_attachment=True, download_name='generated_image.png', mimetype='image/png')
+
+@app.route('/generate_variation', methods=['POST'])
+def generate_variation():
+    data = request.get_json()
+    image_url = data.get('image_url')
+    
+    if not image_url:
+        return jsonify({'success': False, 'error': '画像URLが提供されていません。'}), 400
+    
+    variation_url = create_variation(image_url)
+    
+    return jsonify({'success': True, 'variation_url': variation_url})
+
+    return jsonify({'success': False, 'error': 'バリエーションの生成に失敗しました。'}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True)
