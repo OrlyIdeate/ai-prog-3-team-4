@@ -5,8 +5,9 @@ import langdetect
 
 def translate(text):
     '''日本語から英語に翻訳'''
-    load_dotenv('.env')
-    translator = Translator(os.getenv('DEEPL_API_KEY'))
+    load_dotenv('./.env', override=True)
+    deepl_api_key = os.getenv('DEEPL_API_KEY')
+    translator = Translator(deepl_api_key)
     
     # テキストが英語かどうかを判定
     detected_lang = langdetect.detect(text)
